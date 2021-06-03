@@ -1,0 +1,6 @@
+# Ignore all cloned repositories
+*/
+
+# Ignore the maintained Nimble develop file
+nimble.develop
+

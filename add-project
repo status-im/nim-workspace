@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+PROJECT_NAME=$1
+
+set -eu
+
+cd "$(dirname "${BASH_SOURCE[0]}")"
+WORKSPACE_DIR=$(pwd)
+
+if [[ -z "$PROJECT_NAME" ]]
+then
+  echo "Please specify a project name to clone (e.g. nimbus-eth1)"
+  exit 1
+fi
+
+nimble develop \
+  -p:"$WORKSPACE_DIR" \
+  --develop-file:"$WORKSPACE_DIR/nimble.develop" \
+  --with-dependencies \
+  "git@github.com:/status-im/$PROJECT_NAME"
+
+cp per-project.nimble.develop "$PROJECT_NAME/"
+
