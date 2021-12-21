@@ -4,3 +4,6 @@
 # Ignore the maintained Nimble develop file
 nimble.develop
 
+# Track changes in the scripts folder
+!scripts/
+

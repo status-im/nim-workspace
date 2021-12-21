@@ -2,6 +2,14 @@
 
 A Nimble-based environment for working on one or more Status Nim projects.
 
+## Pre-requisites
+
+The scripts in this repo will automatically manage your Nim and Nimble versions.
+To enable the automation, please install `direnv` from your distro's package
+manager or by following the instructions here:
+
+https://github.com/direnv/direnv
+
 ## Commands
 
 ### `./add-project <project-name>`
