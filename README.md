@@ -2,17 +2,21 @@
 
 A Nimble-based environment for working on one or more Status Nim projects.
 
-## Pre-requisites
+## Prerequisites
 
-The scripts in this repo will automatically manage your Nim and Nimble versions.
-To enable the automation, please install `direnv` from your distro's package
-manager or by following the instructions here:
+Please install the standard C/C++ toolchain for your operating system
+(e.g. `sudo apt install build-essentials`).
+
+The scripts in this repo will automatically take care of installing the
+right version of Nim and Nimble for you. To enable the automation, please
+install `direnv` from your distro's package manager or by following the
+instructions here:
 
 https://github.com/direnv/direnv
 
 ## Commands
 
-### `./add-project <project-name>`
+### `add-project <project-name>`
 
 Clones a Status project you intend to work on. An interactive script will
 ask you whether you also want to clone each of the transitive dependencies
