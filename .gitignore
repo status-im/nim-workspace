@@ -6,4 +6,5 @@ nimble.develop
 
 # Track changes in the scripts folder
 !scripts/
+!scripts/*
 

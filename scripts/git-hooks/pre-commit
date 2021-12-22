@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo 'Creating a commit requires all Nimble checks to pass:'
+nimble check
