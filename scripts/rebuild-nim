@@ -158,8 +158,12 @@ build_nim() {
     mv bin/nim "bin/nim_commit_${NIM_COMMIT_HASH}"
     ln -s "nim_commit_${NIM_COMMIT_HASH}" "bin/nim${EXE_SUFFIX}"
   popd
+
+  [ $V -eq 0 ] && exec >$(tty) 2>&1
 }
 
 if nim_needs_rebuilding; then
   build_nim
 fi
+
+set +e
