@@ -114,6 +114,9 @@ build_nim() {
         git clone "${NIMBLE_REPO}" .
         git checkout "${NIMBLE_COMMIT}"
         # we have to delete .git or koch.nim will checkout a branch tip, overriding our target commit
+        # TODO
+        # This is quite the hack and it breaks the output of `nimble --version`
+        # which prints the Nim revision instead of the Nimble revision.
         rm -rf .git
       popd
     fi
@@ -121,6 +124,10 @@ build_nim() {
     mkdir -p dist
     rm -rf dist/nimble
     ln -s ../"${NIMBLE_DIR}" dist/nimble
+
+    # Clean up the new Nimble cache, because the csources build
+    # won't recognize the validity of the packages there:
+    rm -rf ~/.nimble/pkgs2
 
     # bootstrap the Nim compiler and build the tools
     rm -f bin/nim bin/nim_csources
