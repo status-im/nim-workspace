@@ -19,7 +19,6 @@ function _add_project {
   nimble develop  \
     -p:"$WORKSPACE_DIR" \
     --develop-file:"$WORKSPACE_DIR/nimble.develop" \
-    --with-dependencies \
     "https://github.com/status-im/$PROJECT_NAME"
 
   cp scripts/per-project.nimble.develop "$PROJECT_NAME/nimble.develop"
