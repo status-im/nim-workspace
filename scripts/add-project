@@ -28,3 +28,10 @@ for p in $@
 do
   _add_project "$p"
 done
+
+for p in $@
+do
+  pushd $p
+  nimble setup
+  popd
+done
