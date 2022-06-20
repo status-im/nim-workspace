@@ -15,11 +15,12 @@ WORKSPACE_DIR=$(pwd)
 
 function _add_project {
   PROJECT_NAME=$1
+  ORG="${ORG:-status-im}"
 
   nimble develop  \
     -p:"$WORKSPACE_DIR" \
     --develop-file:"$WORKSPACE_DIR/nimble.develop" \
-    "https://github.com/status-im/$PROJECT_NAME"
+    "https://github.com/$ORG/$PROJECT_NAME"
 
   cp scripts/per-project.nimble.develop "$PROJECT_NAME/nimble.develop"
 }

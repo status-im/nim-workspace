@@ -21,7 +21,9 @@ https://github.com/direnv/direnv
 Clones a Status project you intend to work on. An interactive script will
 ask you whether you also want to clone each of the transitive dependencies
 of the project. All dependencies that were not cloned for development will
-be installed in the Nimble cache.
+be installed in the Nimble cache. `add-project` will clone the project from
+`status-im` organization. If you want to clone project from different github
+organization you may set ORG env variable.
 
 Projects can be removed from the workspace by just deleting the respective
 directory. This will result in Nimble installing the project's package in
