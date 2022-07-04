@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+shopt -s nocaseglob
+
+GIR_PROJECT_DIR=$(git rev-parse --show-toplevel)
+
+cd "$GIT_PROJECT_DIR"
+
+if [ ! -d vendor ]; then
+  SCRIPT_NAME=$(basename "$0")
+  echo "${SCRIPT_NAME} must be executed within a git repo, holding a 'vendor' folder"
+  exit 1
+fi
+
+source ../scripts/lib/git-helpers
+
+for submodule in vendor/*/; do
+  WORKSPACE_DIR="../$(basename "$submodule")"
+  if [ -d "$WORKSPACE_DIR" ]; then
+    copy_revision "$WORKSPACE_DIR" "$submodule"
+  fi
+done

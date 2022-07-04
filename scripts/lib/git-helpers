@@ -1,0 +1,14 @@
+function copy_revision {
+  if [ -d "$1" ] && [ -d "$2" ]; then    
+    pushd "$1" > /dev/null
+    COMMIT="$(git rev-parse HEAD)"
+    echo Switching "$(basename "$2")" to $COMMIT
+    popd > /dev/null
+
+    pushd "$2"
+    git checkout "$COMMIT"
+    popd > /dev/null
+  else
+    echo "Usage: copy_revision <git-dir-1> <git-dir-2>"
+  fi
+}
