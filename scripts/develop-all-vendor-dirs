@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+shopt -s nocaseglob
+
+GIR_PROJECT_DIR=$(git rev-parse --show-toplevel)
+
+cd "$GIT_PROJECT_DIR"
+
+if [ ! -d vendor ]; then
+  SCRIPT_NAME=$(basename "$0")
+  echo "${SCRIPT_NAME} must be executed within a git repo, holding a 'vendor' folder"
+  exit 1
+fi
+
+export GIT_ORG_URL_PREFIX=""
+
+for submodule in vendor/*/; do
+  pushd "$submodule" > /dev/null
+  if ! add-project "$(git config --get remote.origin.url)"; then
+    echo "Failed to add $submodule. Moving on"
+  fi
+  popd > /dev/null
+done
+
+sync-vendor-revisions-to-workspace

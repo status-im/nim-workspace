@@ -15,13 +15,18 @@ WORKSPACE_DIR=$(pwd)
 
 function _add_project {
   PROJECT_NAME=$1
+  if ! git ls-remote "$PROJECT_NAME" > /dev/null 2>&1; then
+    PROJECT_NAME="https://github.com/status-im/$PROJECT_NAME"
+  fi
+
+  PROJECT_DIR=$(basename $PROJECT_NAME)
 
   nimble develop  \
     -p:"$WORKSPACE_DIR" \
     --develop-file:"$WORKSPACE_DIR/nimble.develop" \
-    "https://github.com/status-im/$PROJECT_NAME"
+    "${GIT_ORG_URL_PREFIX}${PROJECT_NAME}"
 
-  cp scripts/per-project.nimble.develop "$PROJECT_NAME/nimble.develop"
+  cp scripts/per-project.nimble.develop "$PROJECT_DIR/nimble.develop"
 }
 
 for p in $@
