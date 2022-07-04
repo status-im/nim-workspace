@@ -24,7 +24,7 @@ function _add_project {
   nimble develop  \
     -p:"$WORKSPACE_DIR" \
     --develop-file:"$WORKSPACE_DIR/nimble.develop" \
-    "${GIT_ORG_URL_PREFIX}${PROJECT_NAME}"
+    "${PROJECT_NAME}"
 
   cp scripts/per-project.nimble.develop "$PROJECT_DIR/nimble.develop"
 }
