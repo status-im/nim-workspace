@@ -17,6 +17,6 @@ source ../scripts/lib/git-helpers
 for submodule in vendor/*/; do
   WORKSPACE_DIR="../$(basename "$submodule")"
   if [ -d "$WORKSPACE_DIR" ]; then
-    copy_revision "$WORKSPACE_DIR" "$submodule"
+    copy_revision "$submodule" "$WORKSPACE_DIR"
   fi
 done

@@ -26,3 +26,39 @@ be installed in the Nimble cache.
 Projects can be removed from the workspace by just deleting the respective
 directory. This will result in Nimble installing the project's package in
 the global cache during the next `nimble build`.
+
+### `add-all-vendor-projects`
+
+This script must be executed within a repository using a `vendor` forder. It
+will try to add all vendored submodules as folders in the workspace.
+
+### `sync-vendor-revisions-to-workspace`
+
+This script must be executed within a repository using a `vendor` folder. It
+will copy the current revisions of submodules in the vendor folder to the
+matching folder in the workspace if present. Typically, the scrupt is executed
+after pulling git revisions that bump vendor sumbodules without also bumping
+the same packages in the Nimble lock file. To resolve the discrepancy, the
+developer would execute the following commands:
+
+```bash
+# Pull the project files as usual
+cd top-level-project
+git pull
+make update # or git submodule update --init --recursive
+
+# Fix the lock file
+sync-vendor-revisions-to-workspace
+nimble lock
+git add nimble.lock
+git commit -m "Update the lock file"
+git push
+```
+
+### `sync-workspace-revisions-to-vendor`
+
+This script must be executed within a repository using a `vendor` folder. It
+will copy the revisions from the current workspace folders to the matching
+submodules in the vendor folder. When you use a workspace and make changes
+to the lockfile (by changing any of the dependencies) you must execute this
+script before commiting to reflect the same change in the vendor folder.
