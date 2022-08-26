@@ -36,7 +36,7 @@ done
 
 for p in $@
 do
-  pushd $p
+  pushd "$(basename $p)"
   nimble setup
   popd
 done
