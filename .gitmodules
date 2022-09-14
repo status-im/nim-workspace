@@ -1,0 +1,3 @@
+[submodule "scripts/csources-nimble"]
+	path = scripts/csources-nimble
+	url = https://github.com/status-im/csources-nimble
