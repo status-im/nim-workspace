@@ -63,4 +63,4 @@ will copy the revisions from the current workspace folders to the matching
 submodules in the vendor folder. When you use a workspace and make changes
 to the lockfile (by changing any of the dependencies) you must execute this
 script before commiting to reflect the same change in the vendor folder, so
-the project can continue building properly without Nimble.
+the respective project can continue building properly without Nimble.
