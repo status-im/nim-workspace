@@ -36,10 +36,11 @@ will try to add all vendored submodules as folders in the workspace.
 
 This script must be executed within a repository using a `vendor` folder. It
 will copy the current revisions of submodules in the vendor folder to the
-matching folder in the workspace if present. Typically, the scrupt is executed
-after pulling git revisions that bump vendor sumbodules without also bumping
-the same packages in the Nimble lock file. To resolve the discrepancy, the
-developer would execute the following commands:
+matching folder in the workspace if present. Typically, the script is executed
+after pulling git revisions from other team members that have bumped vendor
+sumbodules without also bumping the same packages in the Nimble lock file.
+To resolve the arising discrepancy, the developer would execute the following
+commands:
 
 ```bash
 # Pull the project files as usual
@@ -61,4 +62,5 @@ This script must be executed within a repository using a `vendor` folder. It
 will copy the revisions from the current workspace folders to the matching
 submodules in the vendor folder. When you use a workspace and make changes
 to the lockfile (by changing any of the dependencies) you must execute this
-script before commiting to reflect the same change in the vendor folder.
+script before commiting to reflect the same change in the vendor folder, so
+the project can continue building properly without Nimble.
