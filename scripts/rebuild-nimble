@@ -25,6 +25,6 @@ if [ ! -f $NIMBLE ]; then
     cp $NIMBLE_SOURCES/nimble $NIMBLE
 fi
 
-mkdir bin -p
+mkdir -p bin
 rm ./bin/nimble$EXE_SUFFIX 2> /dev/null  || true
 ln -s $NIMBLE ./bin/nimble$EXE_SUFFIX
