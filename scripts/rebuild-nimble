@@ -13,6 +13,10 @@ else
   BUILD_COMMAND="sh compile_nimble.sh"
 fi
 
+pushd $NIMBLE_SOURCES
+NIMBLE_COMMIT=$(git rev-parse HEAD)
+popd
+
 NIMBLE_CACHE_DIR=~/.cache/nim/nim-workspace/
 NIMBLE=$NIMBLE_CACHE_DIR/nimble_$NIMBLE_COMMIT$EXE_SUFFIX
 
