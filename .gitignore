@@ -8,3 +8,5 @@ nimble.develop
 !scripts/
 !scripts/*
 
+nimble
+*.c.o

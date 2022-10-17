@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Used to rebuild nimble if not already build
+
+
+# Windows detection
+if uname | grep -qiE "mingw|msys"; then
+  EXE_SUFFIX=".exe"
+  NIMBLE_SOURCES=./scripts/csources-nimble/nimble-windows/
+  BUILD_COMMAND="./compile_nimble.bat"
+else
+  EXE_SUFFIX=""
+  NIMBLE_SOURCES=./scripts/csources-nimble/nimble-linux/
+  BUILD_COMMAND="sh compile_nimble.sh"
+fi
+
+pushd $NIMBLE_SOURCES
+NIMBLE_COMMIT=$(git rev-parse HEAD)
+popd
+
+NIMBLE_CACHE_DIR=~/.cache/nim/nim-workspace/
+NIMBLE=$NIMBLE_CACHE_DIR/nimble_$NIMBLE_COMMIT$EXE_SUFFIX
+
+if [ ! -f $NIMBLE ]; then
+    git submodule update --init
+    mkdir -p $NIMBLE_CACHE_DIR
+    pushd $NIMBLE_SOURCES
+    $BUILD_COMMAND
+    popd
+    cp $NIMBLE_SOURCES/nimble $NIMBLE
+fi
+
+mkdir -p bin
+rm ./bin/nimble$EXE_SUFFIX 2> /dev/null  || true
+ln -s $NIMBLE ./bin/nimble$EXE_SUFFIX
