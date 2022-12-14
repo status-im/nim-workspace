@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+if [ ! -f "$NIMBLE_DIR/bin/nimlangserver" ] ; then
+    nimble install -y nimlangserver
+fi
