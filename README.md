@@ -14,6 +14,46 @@ instructions here:
 
 https://github.com/direnv/direnv
 
+### Lock files workflow
+
+Using lock files provides a convenient way to fix the versions of the
+dependencies(and nim itself after [1017](https://github.com/nim-lang/nimble/pull/1017) is in). Here it is a guide on how to
+perform the typical dev tasks.
+
+#### Building the project
+Building the project typically happens using the `nimble build` which will
+download and install the versions that are in the `nimble.lock` file. For
+multiple build targets when `nim` is used directly in the `nimble` file,
+`nimble` will call the `nim` from the lock file.
+
+#### `nim` in command line and integration with the tooling
+Using lock files allows using vanilla `nim`. This can be achieved utilizing
+`nimble.paths` file which can be generated using `nimble setup` command. Here it
+is a excerpt how that file looks like:
+
+```
+--noNimblePath
+--path:"/home/yyoncho/.nimble/pkgs2/news-0.5-a5f1789bf650822156712fd3bdec1bf6ab4ac42e"
+--path:"/home/yyoncho/.nimble/pkgs2/protobuf_serialization-0.2.0-9418459027d0d5eb30a974649dc615a76e8e4aca"
+...
+```
+
+The paths file will be used by `nimsuggest`/`nimlangserver` as well.
+
+#### Bumping dependency and testing against dev version of a dependency
+
+When you want to bump and test a version of a depednecy, then you have to use
+`add-project` or use `nimble develop <dep-name>`. This will clone the dependency
+and then you can switch to the version you want to use. Then `nimble lock` will
+update the dependency in the lock file.
+
+#### Staying up to date with changes from your team mates
+
+Once you pull up the changes and if there are changes in the lock file then
+`nimble sync` should be called. This will download the proper versions of the
+dependencies and it will sync the version of the develop mode dependencies if
+any.
+
 ### VScode
 
 For VScode you have to install the following [extension](https://marketplace.visualstudio.com/items?itemName=nimsaem.nimvscode)
